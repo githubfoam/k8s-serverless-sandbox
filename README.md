@@ -1,10 +1,10 @@
 # k8s-serverless-sandbox
-kubernetes serverless knative openfaas pipeline
+kubernetes serverless  pipeline
 
 Travis (.com) branch:
-[![Build Status](https://travis-ci.com/githubfoam/k8s-linkerd-sandbox.svg?branch=master)](https://travis-ci.com/githubfoam/k8s-linkerd-sandbox)  
+[![Build Status](https://travis-ci.com/githubfoam/k8s-serverless-sandbox.svg?branch=master)](https://travis-ci.com/githubfoam/k8s-serverless-sandbox)  
 
 
 ~~~~
-https://github.com/redhat-developer-demos/quarkus-pipeline-demo
+
 ~~~~
