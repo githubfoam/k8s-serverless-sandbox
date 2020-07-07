@@ -5,7 +5,6 @@ set -o nounset
 set -o xtrace
 # set -eox pipefail #safety for script
 
-# https://itnext.io/deploy-your-first-serverless-function-to-kubernetes-232307f7b0a9
 echo "============================OpenFaaS =============================================================="
 # `curl -sSLf https://cli.openfaas.com | sudo sh`
 # `curl -sSLf https://dl.get-arkade.dev | sudo sh`
@@ -20,7 +19,7 @@ kubectl rollout status -n openfaas deploy/gateway
 kubectl port-forward -n openfaas svc/gateway 8080:8080 &
 
 # Now log in using the CLI
-PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo)
+# PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo)
 
 # Calling the OpenFaaS server to validate the credentials...
 # Cannot connect to OpenFaaS on URL: http://127.0.0.1:8080. Get http://127.0.0.1:8080/system/functions: dial tcp 127.0.0.1:8080: connect: connection refused

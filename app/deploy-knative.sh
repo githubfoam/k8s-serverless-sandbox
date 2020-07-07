@@ -5,52 +5,6 @@ set -o nounset
 set -o xtrace
 # set -eox pipefail #safety for script
 
-# echo "=============================openEBS============================================================="
-# if [[ $(egrep -c '(vmx|svm)' /proc/cpuinfo) == 0 ]]; then #check if virtualization is supported on Linux, xenial fails w 0, bionic works w 2
-#            echo "virtualization is not supported"
-#   else
-#         echo "===================================="
-#         echo eval "$(egrep -c '(vmx|svm)' /proc/cpuinfo)" 2>/dev/null
-#         echo "===================================="
-#         echo "virtualization is supported"
-# fi
-# apt-get update -qq && apt-get -qqy install conntrack #http://conntrack-tools.netfilter.org/
-# curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/ # Download kubectl
-# curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/ # Download minikube
-# mkdir -p $HOME/.kube $HOME/.minikube
-# touch $KUBECONFIG
-# sudo minikube start --profile=minikube --vm-driver=none --kubernetes-version=v$KUBERNETES_VERSION #the none driver, the kubectl config and credentials generated are owned by root in the root user’s home directory
-# minikube update-context --profile=minikube
-# chown -R travis: /home/travis/.minikube/
-# eval "$(minikube docker-env --profile=minikube)" && export DOCKER_CLI='docker'
-# echo "=========================================================================================="
-# kubectl version --client #ensure the version
-# kubectl cluster-info
-# minikube status
-# echo "=========================================================================================="
-# echo "Waiting for Kubernetes to be ready ..."
-# for i in {1..150}; do # Timeout after 5 minutes, 150x2=300 secs
-#     if kubectl get pods --namespace=kube-system -lk8s-app=kube-dns|grep Running ; then
-#       break
-#     fi
-#     sleep 2
-# done
-# # |
-# #   echo "Waiting for Kubernetes to be ready ..."
-# #   for i in {1..150}; do # Timeout after 5 minutes, 150x2=300 secs
-# #     if kubectl get pods --namespace=kube-system -lcomponent=kube-addon-manager|grep Running && \
-# #        kubectl get pods --namespace=kube-system -lk8s-app=kube-dns|grep Running ; then
-# #       break
-# #     fi
-# #     sleep 2
-# #   done
-# echo "============================status check=============================================================="
-# minikube status
-# kubectl cluster-info
-# kubectl get pods --all-namespaces;
-# kubectl get pods -n default;
-
-
 #https://github.com/redhat-developer-demos/quarkus-pipeline-demo
 echo "============================Serverless and Pipelines=============================================================="
 
@@ -74,7 +28,7 @@ curl -LO https://github.com/tektoncd/cli/releases/download/v0.10.0/tkn_0.10.0_Da
 tar xvzf tkn_0.10.0_Darwin_x86_64.tar.gz -C /usr/local/bin tkn
 
 minikube addons enable registry
-# kubectl -n kube-system get pods -w
+# kubectl -n kube-system get pods -w # interactive shell
 kubectl get pods --all-namespaces
 echo echo "Waiting for the registry pod to be ready ..."
 for i in {1..150}; do # Timeout after 5 minutes, 60x5=300 secs
@@ -91,6 +45,7 @@ kubectl get pods --all-namespaces
 # push and pull images from internal registry
 # make the registry entry in minikube node’s hosts file and make them resolvable via coredns
 git clone https://github.com/kameshsampath/minikube-helpers.git && cd minikube-helpers/registry
+
 # Add entries to host file
 # All the registry aliases are configured using the configmap registry-aliases-config.yaml
 # create the configmap in kube-system namespace:
@@ -118,19 +73,19 @@ kubectl get pods --all-namespaces
 # bash patch-coredns.sh
 # verify
 # Once successfully patched push and pull from the registry using suffix dev.local, example.com
-kubectl get cm -n kube-system coredns -o yaml
+# kubectl get cm -n kube-system coredns -o yaml
 
 
 # Install Tekton Pipelines
-kubectl apply --filename https://storage.googleapis.com/tekton-releases/latest/release.yaml
-echo echo "Waiting for the Tekton Pipelines Pods to be ready ..."
-for i in {1..150}; do # Timeout after 5 minutes, 60x5=300 secs
-      if kubectl get pods --namespace=tekton-pipelines  | grep ContainerCreating ; then
-        sleep 10
-      else
-        break
-      fi
-done
+# kubectl apply --filename https://storage.googleapis.com/tekton-releases/latest/release.yaml
+# echo echo "Waiting for the Tekton Pipelines Pods to be ready ..."
+# for i in {1..150}; do # Timeout after 5 minutes, 60x5=300 secs
+#       if kubectl get pods --namespace=tekton-pipelines  | grep ContainerCreating ; then
+#         sleep 10
+#       else
+#         break
+#       fi
+# done
 
 
 # Install Knative Serving
@@ -140,30 +95,30 @@ done
 # curl -L  https://raw.githubusercontent.com/knative/serving/release-0.6/third_party/istio-1.1.3/istio-lean.yaml | \
 #   sed 's/LoadBalancer/NodePort/' | \
 #   kubectl apply --filename -
-curl -L  https://raw.githubusercontent.com/knative/serving/release-0.6/third_party/istio-1.1.3/istio-lean.yaml \
-  | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --filename -
-  echo echo "Waiting for the Istio Pods to be ready ..."
-  for i in {1..150}; do # Timeout after 5 minutes, 60x5=300 secs
-        if kubectl get pods --namespace=isito-system  | grep ContainerCreating ; then
-          sleep 10
-        else
-          break
-        fi
-  done
+# curl -L  https://raw.githubusercontent.com/knative/serving/release-0.6/third_party/istio-1.1.3/istio-lean.yaml \
+#   | sed 's/LoadBalancer/NodePort/' \
+#   | kubectl apply --filename -
+#   echo echo "Waiting for the Istio Pods to be ready ..."
+#   for i in {1..150}; do # Timeout after 5 minutes, 60x5=300 secs
+#         if kubectl get pods --namespace=isito-system  | grep ContainerCreating ; then
+#           sleep 10
+#         else
+#           break
+#         fi
+#   done
 
-  kubectl apply --selector knative.dev/crd-install=true \
-  --filename https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml \
-  --filename https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager
-
-  echo echo "Waiting for the Knative Serving Pods to be ready ..."
-  for i in {1..150}; do # Timeout after 5 minutes, 60x5=300 secs
-        if kubectl get pods --namespace=knative-serving  | grep ContainerCreating ; then
-          sleep 10
-        else
-          break
-        fi
-  done
+  # kubectl apply --selector knative.dev/crd-install=true \
+  # --filename https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml \
+  # --filename https://github.com/knative/serving/releases/download/v0.6.0/serving.yaml --selector networking.knative.dev/certificate-provider!=cert-manager
+  #
+  # echo echo "Waiting for the Knative Serving Pods to be ready ..."
+  # for i in {1..150}; do # Timeout after 5 minutes, 60x5=300 secs
+  #       if kubectl get pods --namespace=knative-serving  | grep ContainerCreating ; then
+  #         sleep 10
+  #       else
+  #         break
+  #       fi
+  # done
 
 
 
