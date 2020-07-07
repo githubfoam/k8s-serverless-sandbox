@@ -6,5 +6,6 @@ Travis (.com) branch:
 
 
 ~~~~
-
+https://www.openfaas.com/
+https://knative.dev/
 ~~~~
