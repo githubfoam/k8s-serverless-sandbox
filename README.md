@@ -8,4 +8,7 @@ Travis (.com) branch:
 ~~~~
 https://www.openfaas.com/
 https://knative.dev/
+https://github.com/knative/test-infra
+https://github.com/knative/observability
+https://github.com/openfaas/faas
 ~~~~
