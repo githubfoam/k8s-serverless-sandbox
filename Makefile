@@ -1,6 +1,9 @@
 IMAGE := alpine/fio
 APP:="app/deploy-openesb.sh"
 
+deploy-microk8s:
+	bash microk8s/deploy-microk8s.sh
+
 deploy-k3d:
 	bash k3d/deploy-k3d.sh
 

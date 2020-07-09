@@ -38,6 +38,22 @@ matrix:
       after_success:
         - deactivate
 
+    - name: "openfaas microk8s latest  Python 3.7 on bionic amd64" #OK
+      dist: bionic
+      arch: amd64
+      language: python
+      python: 3.7
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+        - pip install -r requirements.txt
+      script:
+        - sudo make deploy-microk8s
+        - sudo make deploy-openfaas
+      after_success:
+        - deactivate
+
     - name: "openfaas k3d latest  Python 3.7 on bionic amd64" #OK
       dist: bionic
       arch: amd64
@@ -49,7 +65,7 @@ matrix:
         - source ~venvpy3/bin/activate
         - pip install -r requirements.txt
       script:
-        - sudo make deploy-minikube-latest
+        - sudo make deploy-k3d
         - sudo make deploy-openfaas
       after_success:
         - deactivate
