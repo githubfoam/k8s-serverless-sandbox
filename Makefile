@@ -10,6 +10,9 @@ deploy-minikube:
 deploy-minikube-latest:
 	bash minikube/deploy-minikube-latest.sh
 
+deploy-openfaas-golang:
+	bash app/deploy-openfaas-golang.sh
+
 deploy-openfaas:
 	bash app/deploy-openfaas.sh
 
