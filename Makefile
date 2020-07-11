@@ -8,7 +8,7 @@ deploy-k3d:
 	bash k3d/deploy-k3d.sh
 
 deploy-kind:
-	bash kind/deploy-kind.sh
+	bash deploy-kind.sh
 
 deploy-minikube:
 	bash minikube/deploy-minikube.sh
