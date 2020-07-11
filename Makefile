@@ -2,19 +2,19 @@ IMAGE := alpine/fio
 APP:="app/deploy-openesb.sh"
 
 deploy-microk8s:
-	bash microk8s/deploy-microk8s.sh
+	bash platform/deploy-microk8s.sh
 
 deploy-k3d:
-	bash k3d/deploy-k3d.sh
+	bash platform/deploy-k3d.sh
 
 deploy-kind:
-	bash deploy-kind.sh
+	bash platform/deploy-kind.sh
 
 deploy-minikube:
-	bash minikube/deploy-minikube.sh
+	bash platform/deploy-minikube.sh
 
 deploy-minikube-latest:
-	bash minikube/deploy-minikube-latest.sh
+	bash platform/deploy-minikube-latest.sh
 
 deploy-openfaas-golang:
 	bash app/deploy-openfaas-golang.sh
