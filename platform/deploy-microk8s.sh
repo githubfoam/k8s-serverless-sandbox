@@ -6,7 +6,10 @@ set -o xtrace
 # set -eox pipefail #safety for script
 
 echo "=============================deploy microk8s============================================================="
-usermod -a -G microk8s $USER #add your current user to the group and gain access to the .kube caching directory
+
+#add your current user to the group and gain access to the .kube caching directory
+groupadd microk8s # create a new group called microk8s
+usermod -a -G microk8s $USER group 'microk8s' does not exist
 
 #microk8s status --wait-ready #Check the status
 echo "Waiting for  microk8s to be ready ..."
