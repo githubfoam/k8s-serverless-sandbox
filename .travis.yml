@@ -31,10 +31,10 @@ matrix:
         - pip install -r requirements.txt
       script:
         - sudo make deploy-kind
-        # - sudo kind create cluster --name openfaas-testing
-        # - sudo kubectl config use-context kind-openfaas-testing
-        # - sudo make deploy-openfaas
-        # - sudo kind delete cluster --name openfaas-testing
+        - sudo kind create cluster --name openfaas-testing
+        - sudo kubectl config use-context kind-openfaas-testing
+        - sudo make deploy-openfaas
+        - sudo kind delete cluster --name openfaas-testing
       after_success:
         - deactivate
 
