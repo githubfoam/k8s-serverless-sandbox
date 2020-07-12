@@ -20,25 +20,25 @@ deploy-openfaas-golang:
 	bash app/deploy-openfaas-golang.sh
 
 deploy-linkerd-openfaas:
-	bash app/deploy-linkerd-openfaas
+	bash app/deploy-linkerd-openfaas.sh
 
 deploy-openfaas:
 	bash app/deploy-openfaas.sh
 
 deploy-linkerd-knative-kourier:
-	bash app/deploy-linkerd-knative-kourier
+	bash app/deploy-linkerd-knative-kourier.sh
 
 deploy-linkerd-knative-kong:
-	bash app/deploy-linkerd-knative-kong
+	bash app/deploy-linkerd-knative-kong.sh
 
 deploy-linkerd-knative-gloo:
-	bash app/deploy-linkerd-knative-gloo
+	bash app/deploy-linkerd-knative-gloo.sh
 
 deploy-linkerd-knative-contour:
-	bash app/deploy-linkerd-knative-contour
+	bash app/deploy-linkerd-knative-contour.sh
 
 deploy-linkerd-knative-ambassador:
-	bash app/deploy-linkerd-knative-ambassador
+	bash app/deploy-linkerd-knative-ambassador.sh
 
 deploy-istio-knative:
 	bash app/deploy-istio-knative.sh
