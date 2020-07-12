@@ -11,10 +11,6 @@ echo "============================Serverless Service Mesh with Knative and Linke
 # Install Knative Serving
 # https://knative.dev/docs/install/any-kubernetes-cluster/#installing-the-serving-component
 
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
 # Install the Custom Resource Definitions (aka CRDs)
 kubectl apply --filename https://github.com/knative/serving/releases/download/v0.16.0/serving-crds.yaml
 
