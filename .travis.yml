@@ -61,7 +61,7 @@ matrix:
         - pip install -r requirements.txt
       script:
         - sudo make deploy-microk8s
-        - sudo make deploy-openfaas
+        # - sudo make deploy-openfaas
       after_success:
         - deactivate
 
