@@ -15,8 +15,8 @@ arkade install openfaas #use arkade to install OpenFaaS
 arkade info openfaas
 
 # Forward the gateway to your machine
-# kubectl rollout status -n openfaas deploy/gateway
-# kubectl port-forward -n openfaas svc/gateway 8080:8080 &
+kubectl rollout status -n openfaas deploy/gateway
+kubectl port-forward -n openfaas svc/gateway 8080:8080 &
 
 # Now log in using the CLI
 # PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo)

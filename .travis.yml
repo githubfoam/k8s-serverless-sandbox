@@ -38,7 +38,7 @@ matrix:
       after_success:
         - deactivate
 
-    - name: "openfaas microk8s latest  Python 3.7 on bionic amd64" #OK
+    - name: "openfaas latest snapped w microk8s kubectl helm  Python 3.7 on bionic amd64" #OK
       dist: bionic
       arch: amd64
       addons:
@@ -46,6 +46,12 @@ matrix:
           - name: microk8s
             confinement: classic # or devmode
             channel: latest/stable # will be passed to --channel flag      
+          - name: kubectl
+            confinement: classic 
+            channel: latest/stable 
+          - name: helm
+            confinement: classic 
+            channel: latest/stable             
       language: python
       python: 3.7
       before_install:
@@ -79,7 +85,7 @@ matrix:
         - pip install -r requirements.txt
       script:
         - sudo make deploy-k3d
-        - sudo make deploy-openfaas
+        # - sudo make deploy-openfaas
       after_success:
         - deactivate
 
@@ -112,7 +118,7 @@ matrix:
         - pip install -r requirements.txt
       script:
         - sudo make deploy-minikube-latest
-        - sudo make deploy-openfaas-golang
+        # - sudo make deploy-openfaas-golang
       after_success:
         - deactivate
 
