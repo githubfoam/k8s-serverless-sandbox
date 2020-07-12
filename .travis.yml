@@ -41,6 +41,11 @@ matrix:
     - name: "openfaas microk8s latest  Python 3.7 on bionic amd64" #OK
       dist: bionic
       arch: amd64
+      addons:
+        snaps:
+          - name: microk8s
+            confinement: classic # or devmode
+            channel: latest/stable # will be passed to --channel flag      
       language: python
       python: 3.7
       before_install:
