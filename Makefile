@@ -22,6 +22,9 @@ deploy-openfaas-golang:
 deploy-openfaas:
 	bash app/deploy-openfaas.sh
 
+deploy-linkerd-knative-ambassador:
+	bash app/deploy-linkerd-knative-ambassador
+
 deploy-knative:
 	bash app/deploy-knative.sh
 
