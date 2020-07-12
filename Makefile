@@ -7,6 +7,9 @@ deploy-microk8s:
 deploy-k3d:
 	bash platform/deploy-k3d.sh
 
+deploy-kind-kubectl-helm:
+	bash platform/deploy-kind-kubectl-helm.sh
+
 deploy-kind:
 	bash platform/deploy-kind.sh
 
